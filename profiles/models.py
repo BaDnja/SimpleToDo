@@ -38,6 +38,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_("email address"), max_length=255, unique=True)
     first_name = models.CharField(_("first name"), max_length=128)
     last_name = models.CharField(_("last name"), max_length=128)
+    is_active = models.BooleanField(_("active"), default=True)
     is_staff = models.BooleanField(_("staff"), default=False)
 
     objects = UserProfileManager()

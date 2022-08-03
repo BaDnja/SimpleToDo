@@ -3,9 +3,18 @@ from django.utils.translation import gettext_lazy as _
 from codebooks.models import Priority
 from groups import models as groups_models
 from lists import models as lists_models
+from codebooks import models as codebooks_models
 
 
-class Task(groups_models.AbstractBase):
+class AbstractTask(groups_models.AbstractBase):
+    status = models.CharField(_("status"), max_length=128, choices=codebooks_models.Status.choices,
+                              default=codebooks_models.Status.IN_PROGRESS)
+
+    class Meta:
+        abstract = True
+
+
+class Task(AbstractTask):
     """Class for storing and manipulating Tasks."""
     due_date = models.DateField(_("due date"), blank=True, null=True)
     task_list = models.ForeignKey(lists_models.List, on_delete=models.CASCADE, verbose_name=_("list"),
@@ -19,4 +28,3 @@ class Task(groups_models.AbstractBase):
     class Meta:
         verbose_name = _("task")
         verbose_name_plural = _("tasks")
-

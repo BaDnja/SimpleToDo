@@ -6,7 +6,7 @@ class Status(models.TextChoices):
     TODO = "todo", _("To do")
     IN_PROGRESS = "in_progress", _("In progress")
     ON_HOLD = "on_hold", _("On hold")
-    DONE = "done", _("done")
+    DONE = "done", _("Done")
 
 
 class Priority(models.TextChoices):
