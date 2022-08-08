@@ -1,12 +1,13 @@
 from django.db import models
+from profiles.models import UserProfile
 from django.utils.translation import gettext_lazy as _
-from codebooks import models as codebooks_models
 
 
 class AbstractBase(models.Model):
     """Abstract class for common objects like: tasks, lists, groups, etc."""
     name = models.CharField(_("name"), max_length=128)
     description = models.TextField(_("description"), max_length=255, blank=True, null=True)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, verbose_name=_("user"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("date and time when created"))
     modified_at = models.DateTimeField(auto_now=True, verbose_name=_("date and time when last modified"))
 
