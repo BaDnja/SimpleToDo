@@ -7,4 +7,4 @@ class GroupSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.Group
-        fields = '__all__'
+        exclude = ("user",)

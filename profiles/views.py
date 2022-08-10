@@ -1,4 +1,5 @@
 from rest_framework import viewsets, filters
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
@@ -10,9 +11,12 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.UserProfileSerializer
     queryset = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication,)
-    permission_classes = (permissions.UpdateOwnProfile,)
+    permission_classes = (permissions.UpdateOwnProfile, IsAuthenticated)
     filter_backends = (filters.SearchFilter,)
     search_fields = ("email", "first_name", "last_name")
+
+    def get_queryset(self):
+        return self.queryset.filter(id=self.request.user.id)
 
 
 class UserLoginApiView(ObtainAuthToken):
