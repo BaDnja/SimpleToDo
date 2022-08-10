@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from groups import models
+from groups.models import Group
 
 
 class GroupSerializer(serializers.ModelSerializer):
     """Serialize a group object"""
 
     class Meta:
-        model = models.Group
+        model = Group
         exclude = ("user",)

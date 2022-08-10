@@ -1,6 +1,7 @@
 from django.db import models
-from profiles.models import UserProfile
 from django.utils.translation import gettext_lazy as _
+
+from profiles.models import UserProfile
 
 
 class AbstractBase(models.Model):
