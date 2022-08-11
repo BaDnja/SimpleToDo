@@ -4,4 +4,5 @@ urlpatterns = [
     path('profiles/', include('profiles.urls')),
     path('groups/', include('groups.urls')),
     path('lists/', include('lists.urls')),
+    path('tasks/', include('tasks.urls')),
 ]

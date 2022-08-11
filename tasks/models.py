@@ -1,14 +1,14 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from codebooks.models import Priority
-from groups import models as groups_models
+
+from codebooks.models import Status, Priority
+from groups.models import AbstractBase
 from lists import models as lists_models
-from codebooks import models as codebooks_models
 
 
-class AbstractTask(groups_models.AbstractBase):
-    status = models.CharField(_("status"), max_length=128, choices=codebooks_models.Status.choices,
-                              default=codebooks_models.Status.IN_PROGRESS)
+class AbstractTask(AbstractBase):
+    status = models.CharField(_("status"), max_length=128, choices=Status.choices,
+                              default=Status.IN_PROGRESS)
 
     class Meta:
         abstract = True
